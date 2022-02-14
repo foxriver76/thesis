@@ -29,5 +29,7 @@ of the thesis. To do so, execute them via
 python <path-to-file>
 ```
 
+Execution works from the root folder as well as from the chapters folder.
+
 ## LICENSE
 The source code is licensed under the MIT license.

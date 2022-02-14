@@ -1,5 +1,5 @@
 import sys,os
-sys.path.append(os.path.abspath(__file__ + "/../../../"))
+sys.path.append(os.path.abspath(__file__ + "/../../"))
 from joblib import Parallel, delayed
 from skmultiflow.prototype.robust_soft_learning_vector_quantization import RobustSoftLearningVectorQuantization as RSLVQ
 from skmultiflow.evaluation.evaluate_prequential import EvaluatePrequential
@@ -10,6 +10,10 @@ from skmultiflow.trees.hoeffding_adaptive_tree import HAT
 from skmultiflow.lazy.sam_knn import SAMKNN
 from skmultiflow.meta.adaptive_random_forests import AdaptiveRandomForest
 from prototype_lvq.utils.study import Study
+
+# disable the stream generator warnings
+import warnings
+warnings.filterwarnings('ignore')
 
 def init_classifiers():
     n_prototypes_per_class = 4
@@ -30,7 +34,7 @@ def evaluate(stream,metrics,study_size):
     clfs,names = init_classifiers()
     stream.prepare_for_use()
     evaluator = EvaluatePrequential(show_plot=True, batch_size=10, max_samples=study_size, metrics=metrics,
-                                    output_file=stream.name+" "+str(names)+".csv")
+                                    output_file='_'+stream.name+" "+str(names)+".csv")
 
     evaluator.evaluate(stream=stream, model=clfs, model_names=names)
 

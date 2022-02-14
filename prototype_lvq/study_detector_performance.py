@@ -2,12 +2,15 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import confusion_matrix
 import sys,os
-sys.path.append(os.path.abspath(__file__ + "/../../../"))
-from skmultiflow.bayes.naive_bayes import NaiveBayes
+sys.path.append(os.path.abspath(__file__ + "/../../"))
+from prototype_lvq.model.naive_bayes import cdnb
 from prototype_lvq.utils.study import Study
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+# disable the stream generator warnings
+import warnings
+warnings.filterwarnings('ignore')
 
 # Test settings
 n_batches = 100000
@@ -54,7 +57,7 @@ streams = s_streams+r_streams
 # plus concept drift detection placeholder
 # detectors = ["KSWIN", "ADWIN", "EDDM", "DDM"]
 detectors = ["EDDM"]
-cls = [NaiveBayes(drift_detector=s) for s in detectors]
+cls = [cdnb(drift_detector=s) for s in detectors]
 cd_pred = np.zeros((len(detectors), study_size, len(streams),n_batches))
 
 # Testscript

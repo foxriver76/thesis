@@ -1,0 +1,14 @@
+,EDDM
+mixed_a,0.505654
+mixed_g,0.500017
+Hyperplane Generator,0.728236
+rand_tree,0.621601
+rbf_if,0.509
+rbf_im,0.539391
+sea_a,0.692182
+sea_g,0.651423
+Mixed Generator_Mixed Generator_1000_1,0.49543
+Mixed Generator_Mixed Generator_1000_1000,0.491588
+SEA Generator_SEA Generator_1000_1,0.722647
+SEA Generator_SEA Generator_1000_1000,0.722976
+Mean,0.6

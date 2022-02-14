@@ -45,11 +45,10 @@ class Study():
         else:
             self.streams = streams
         self.path = path
-        self.root_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
         self.date_format = "%Y-%m-%d %H-%M"
         self.metrics = ['accuracy', 'kappa_t', 'kappa_m', 'kappa']
         self.date = str(datetime.datetime.now().strftime(self.date_format))
-        self.chwd_root()
+
         try:
             if not os.path.exists(self.path):
                 os.mkdir(self.path)
@@ -271,5 +270,3 @@ class Study():
             raise FileNotFoundError("Real-world datasets can't be loaded! Check directory")
             return []
         
-    def chwd_root(self):
-        os.chdir(self.root_dir)

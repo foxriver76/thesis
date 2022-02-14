@@ -1,5 +1,5 @@
 # Prototype-based Concept Drift Handling
-This chapter contains the following files:
+This chapter contains the following __relevant__ files:
 
     - model/aglvq: Implementation of the GLVQ with momentum-based optimizer
     - model/arslvq: Implementation of the RSLVQ with momentum-based optimizer
