@@ -8,12 +8,13 @@ The following folder structure is used in this repository:
 - prototype_lvq: Contains experiments and algorithms of Chapter 3
 - random_projection: Contains experiments and algorithms of Chapter 4
 - coresets: Contains experiments and algorithms of Chapter 5
+- datasets: Contains all used datasets except from stream generators
 
 Every folder has its own README.md file, which explains the content and strcuture.
 Furthermore, usage examples are provided.
 
 ## Requirements
-For execution of the experiments you need to have a runing Python3.6 installation or higher.
+For execution of the experiments you need to have a running Python3.6 installation or higher.
 
 Furthermore, ensure that the following packages are installed:
 
