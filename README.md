@@ -28,3 +28,6 @@ of the thesis. To do so, execute them via
 ```bash
 python <path-to-file>
 ```
+
+## LICENSE
+The source code is licensed under the MIT license.

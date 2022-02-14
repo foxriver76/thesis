@@ -1,6 +1,0 @@
-# TEST CONFIGURATION BEGIN
-# ConceptDriftStream(alpha=90.0, drift_stream=MIXEDGenerator(balance_classes=False, classification_function=1, random_state=112), position=2000, random_state=112, stream=MIXEDGenerator(balance_classes=False, classification_function=0, random_state=112), width=1)
-# [SamKnn] SAMKNNClassifier(ltm_size=0.4, max_window_size=None, min_stm_size=50, n_neighbors=5, stm_size_option='maxACCApprox', use_ltm=True, weighting='distance')
-# EvaluatePrequential(batch_size=10, data_points_for_classification=False, max_samples=100000, max_time=inf, metrics=['accuracy', 'model_size'], n_wait=200, output_file='mixed_g_memory_other.csv', pretrain_size=200, restart_stream=True, show_plot=False)
-# TEST CONFIGURATION END
-id,mean_acc_[SamKnn],current_acc_[SamKnn],model_size_[SamKnn]
