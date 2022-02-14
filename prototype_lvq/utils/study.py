@@ -45,7 +45,7 @@ class Study():
         else:
             self.streams = streams
         self.path = path
-        self.root_dir = os.path.dirname(os.path.abspath(__file__))
+        self.root_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
         self.date_format = "%Y-%m-%d %H-%M"
         self.metrics = ['accuracy', 'kappa_t', 'kappa_m', 'kappa']
         self.date = str(datetime.datetime.now().strftime(self.date_format))
@@ -53,7 +53,8 @@ class Study():
         try:
             if not os.path.exists(self.path):
                 os.mkdir(self.path)
-        except Exception: raise FileNotFoundError("Error while creating Directory!")
+        except Exception: 
+            raise FileNotFoundError("Error while creating Directory!")
     
     def init_standard_streams(self):
         """Initialize standard data streams
@@ -224,20 +225,21 @@ class Study():
 
         if not os.path.join(this_dir, "..", "..", "datasets"):
             raise FileNotFoundError("Folder for data cannot be found! Should be datasets")
-        os.chdir(os.path.join(this_dir, "..", "..", "datasets"))
+        dataset_dir_abs = os.path.join(this_dir, '..', '..', 'datasets')
+        
         try:
-            covertype = FileStream(os.path.realpath('covtype.csv'))  # Label failure
+            covertype = FileStream(os.path.realpath(f'{dataset_dir_abs}/covertype.csv'))  # Label failure
             covertype.name = "covertype"
-            elec = FileStream(os.path.realpath('elec.csv'))
+            elec = FileStream(os.path.realpath(f'{dataset_dir_abs}/elec.csv'))
             elec.name = "elec"
-            poker = FileStream(os.path.realpath('poker.csv'))  # label failure
+            poker = FileStream(os.path.realpath(f'{dataset_dir_abs}/poker.csv'))  # label failure
             poker.name = "poker"
-            weather = FileStream(os.path.realpath('weather.csv'))
+            weather = FileStream(os.path.realpath(f'{dataset_dir_abs}/weather.csv'))
             weather.name = "weather"
-            gmsc = FileStream(os.path.realpath('gmsc.csv'))
+            gmsc = FileStream(os.path.realpath(f'{dataset_dir_abs}/gmsc.csv'))
             gmsc.name = "gmsc"
             #  airlines = FileStream(os.path.realpath('airlines.csv')) #label failure
-            moving_squares = FileStream(os.path.realpath('moving_squares.csv'))
+            moving_squares = FileStream(os.path.realpath(f'{dataset_dir_abs}/moving_squares.csv'))
             moving_squares.name = "moving_squares"
 
         except Exception:
@@ -249,24 +251,24 @@ class Study():
     
         if not os.path.join(this_dir, "..", "..","datasets"):
             raise FileNotFoundError("Folder for data cannot be found! Should be datasets")
-        os.chdir(os.path.join(this_dir, "..", "..","datasets"))
+        dataset_dir_abs = os.path.join(this_dir, '..', '..', 'datasets')
         try:   
-            covertype = FileStream(os.path.realpath('covtype.csv')) # Label failure
+            covertype = FileStream(os.path.realpath(f'{dataset_dir_abs}/covtype.csv')) # Label failure
             covertype.name = "covertype"
-            elec = FileStream(os.path.realpath('elec.csv'))
+            elec = FileStream(os.path.realpath(f'{dataset_dir_abs}/elec.csv'))
             elec.name = "elec"
-            poker = FileStream(os.path.realpath('poker.csv')) #label failure
+            poker = FileStream(os.path.realpath(f'{dataset_dir_abs}/poker.csv')) #label failure
             poker.name = "poker"
-            weather = FileStream(os.path.realpath('weather.csv'))
+            weather = FileStream(os.path.realpath(f'{dataset_dir_abs}/weather.csv'))
             weather.name = "weather"
-            gmsc = FileStream(os.path.realpath('gmsc.csv'))
+            gmsc = FileStream(os.path.realpath(f'{dataset_dir_abs}/gmsc.csv'))
             gmsc.name = "gmsc"
           #  airlines = FileStream(os.path.realpath('airlines.csv')) #label failure
-            moving_squares = FileStream(os.path.realpath('moving_squares.csv'))
+            moving_squares = FileStream(os.path.realpath(f'{dataset_dir_abs}/moving_squares.csv'))
             moving_squares.name = "moving_squares"
             return [covertype,elec, poker, weather, gmsc, moving_squares]
         except Exception: 
-            raise FileNotFoundError("Real-world datasets can't loaded! Check directory ")
+            raise FileNotFoundError("Real-world datasets can't be loaded! Check directory")
             return []
         
     def chwd_root(self):
