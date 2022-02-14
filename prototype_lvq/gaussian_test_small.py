@@ -8,8 +8,8 @@ Created on Tue Jul  3 09:11:56 2018
 
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
-from arslvq import RSLVQ
-from aglvq import GLVQ
+from model.arslvq import RSLVQ
+from model.aglvq import GLVQ
 from sklearn.metrics import accuracy_score
 
 X, y_true = make_blobs(n_samples=3000, centers=4,

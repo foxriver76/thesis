@@ -67,21 +67,21 @@ def five_fold(stream, clf):
     f.write('Runtime: {} +- {}\n\n'.format(np.array(runtime_fold).mean(), np.array(runtime_fold).std()))
     f.close()
     
-    f = open('res_tex_acc.txt', 'a+')
-    f.write(' & ${} \\pm {}$'.format(round(np.array(acc_fold).mean() * 100, 2), round(np.array(acc_fold).std() * 100, 2)))
-    f.close()
-    
-    f = open('res_tex_kappa.txt', 'a+')
-    f.write(' & ${} \\pm {}$'.format(round(np.array(kappa_fold).mean() * 100, 2), round(np.array(kappa_fold).std() * 100, 2)))
-    f.close()
-    
-    f = open('res_tex_time.txt', 'a+')
-    f.write(' & ${} \\pm {}$'.format(round(np.array(runtime_fold).mean(), 2), round(np.array(runtime_fold).std(), 2)))
-    f.close()
+#    f = open('res_tex_acc.txt', 'a+')
+#    f.write(' & ${} \\pm {}$'.format(round(np.array(acc_fold).mean() * 100, 2), round(np.array(acc_fold).std() * 100, 2)))
+#    f.close()
+#    
+#    f = open('res_tex_kappa.txt', 'a+')
+#    f.write(' & ${} \\pm {}$'.format(round(np.array(kappa_fold).mean() * 100, 2), round(np.array(kappa_fold).std() * 100, 2)))
+#    f.close()
+#    
+#    f = open('res_tex_time.txt', 'a+')
+#    f.write(' & ${} \\pm {}$'.format(round(np.array(runtime_fold).mean(), 2), round(np.array(runtime_fold).std(), 2)))
+#    f.close()
         
 if __name__ == '__main__':
-    from aglvq import GLVQ
-    from arslvq import RSLVQ
+    from model.aglvq import GLVQ
+    from model.arslvq import RSLVQ
     from skmultiflow.trees import HoeffdingTreeClassifier as HoeffdingTree, HoeffdingAdaptiveTreeClassifier as HAT
     from skmultiflow.meta import OzaBaggingClassifier as OzaBagging, OzaBaggingADWINClassifier as OzaBaggingAdwin
     from skmultiflow.lazy import SAMKNNClassifier as SAMKNN
@@ -248,37 +248,37 @@ if __name__ == '__main__':
     stream.name = 'GMSC'
     streams.append(stream)
     
-    f = open('res_tex_acc.txt', 'a+')
-    f.write('\\textbf{Dataset}')
-    for clf in clfs:
-        f.write(' & \\textbf{{{}}}'.format(clf.name))
-    f.close()
-    
-    f = open('res_tex_kappa.txt', 'a+')
-    f.write('\\textbf{Dataset}')
-    for clf in clfs:
-        f.write(' & \\textbf{{{}}}'.format(clf.name))
-    f.close()
-    
-    f = open('res_tex_time.txt', 'a+')
-    f.write('\\textbf{Dataset}')
-    for clf in clfs:
-        f.write(' & \\textbf{{{}}}'.format(clf.name))
-    f.close()
-    
-    for stream in streams:
-        f = open('res_tex_acc.txt', 'a+')
-        f.write('\\\\\n')
-        f.write('{}'.format(stream.name))
-        f.close()
-        f = open('res_tex_kappa.txt', 'a+')
-        f.write('\\\\\n')
-        f.write('{}'.format(stream.name))
-        f.close()
-        f = open('res_tex_time.txt', 'a+')
-        f.write('\\\\\n')
-        f.write('{}'.format(stream.name))
-        f.close()
-        for clf in clfs:
-            tuned_clf = grid_search(copy.deepcopy(clf), copy.deepcopy(stream)) if clf.search_grid is not None else copy.deepcopy(clf)
-            five_fold(copy.deepcopy(stream), tuned_clf)
+#    f = open('res_tex_acc.txt', 'a+')
+#    f.write('\\textbf{Dataset}')
+#    for clf in clfs:
+#        f.write(' & \\textbf{{{}}}'.format(clf.name))
+#    f.close()
+#    
+#    f = open('res_tex_kappa.txt', 'a+')
+#    f.write('\\textbf{Dataset}')
+#    for clf in clfs:
+#        f.write(' & \\textbf{{{}}}'.format(clf.name))
+#    f.close()
+#    
+#    f = open('res_tex_time.txt', 'a+')
+#    f.write('\\textbf{Dataset}')
+#    for clf in clfs:
+#        f.write(' & \\textbf{{{}}}'.format(clf.name))
+#    f.close()
+#    
+#    for stream in streams:
+#        f = open('res_tex_acc.txt', 'a+')
+#        f.write('\\\\\n')
+#        f.write('{}'.format(stream.name))
+#        f.close()
+#        f = open('res_tex_kappa.txt', 'a+')
+#        f.write('\\\\\n')
+#        f.write('{}'.format(stream.name))
+#        f.close()
+#        f = open('res_tex_time.txt', 'a+')
+#        f.write('\\\\\n')
+#        f.write('{}'.format(stream.name))
+#        f.close()
+#        for clf in clfs:
+#            tuned_clf = grid_search(copy.deepcopy(clf), copy.deepcopy(stream)) if clf.search_grid is not None else copy.deepcopy(clf)
+#            five_fold(copy.deepcopy(stream), tuned_clf)
