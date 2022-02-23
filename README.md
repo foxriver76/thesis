@@ -21,6 +21,9 @@ Furthermore, ensure that the following packages are installed:
 - scikit-multiflow
 - sklearn
 
+This can be simply done by executing `pip install .` in this directory, which will
+execute the install script of this thesis.
+
 ## Execution
 All files which are not represent a model implementation can be executed to generate resulsts
 of the thesis. To do so, execute them via
