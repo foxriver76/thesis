@@ -7,10 +7,9 @@ Created on Mon Dec 16 15:17:37 2019
 
 import numpy as np
 from skmultiflow.prototype import RobustSoftLearningVectorQuantization as RSLVQ
-from skmultiflow.trees import HAT, HoeffdingTree as HT
 from skmultiflow.meta import AdaptiveRandomForest as ARF
 from skmultiflow.lazy import SAMKNN
-from sklearn.metrics import accuracy_score, confusion_matrix, cohen_kappa_score
+from sklearn.metrics import accuracy_score, cohen_kappa_score
 from sklearn.random_projection import SparseRandomProjection
 from random_projection.model.arslvq import RSLVQ as ARSLVQ
 import copy
