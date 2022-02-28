@@ -81,6 +81,7 @@ class ReactiveRobustSoftLearningVectorQuantization(ClassifierMixin, BaseEstimato
         self.prototypes_per_class = prototypes_per_class
         self.initial_fit = True
         self.class_labels  = []
+        self.gamma = gamma
 
         #### Reactive extensions  ####
         self.confidence = confidence

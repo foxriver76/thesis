@@ -16,7 +16,7 @@ from sklearn.metrics import accuracy_score, cohen_kappa_score
 import time
 from rff_base import Base as RFF
 from random_projection.model.rrslvq import ReactiveRobustSoftLearningVectorQuantization as RRSLVQ
-from rslvq import RSLVQ
+from random_projection.model.rslvq import RSLVQ
 
 import copy
 res_file="rp_result_stream1_1.txt"
