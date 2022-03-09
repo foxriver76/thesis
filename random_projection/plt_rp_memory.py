@@ -23,8 +23,8 @@ def plot_memory(input_path, output_path):
     plt.yscale('log')
     plt.xlabel('Timestep $t$')
     plt.ylabel('Model size in kB')   
-    plt.show()
     plt.savefig(output_path)
+    plt.show()
 
 # no projection
 plot_memory('_rp_mem_no_proj.csv', 'plt/rp_memory_no_proj.eps')
