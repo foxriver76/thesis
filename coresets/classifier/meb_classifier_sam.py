@@ -28,7 +28,7 @@ class SWMEBClf:
         self.only_misclassified = only_misclassified
         self.kernel_fun = kernel_fun
     
-    def partial_fit(self, X:np.array, y:np.array, classes:np.array):
+    def partial_fit(self, X:np.array, y:np.array, classes:np.array=None):
         """ X : np.array
                 data
             y : np.array
@@ -37,10 +37,14 @@ class SWMEBClf:
                 unique class labels
         """
         if self.initial_fit is True:
+            if classes is None:
+                raise ValueError('Need classes on first fit')
+            
             for cl in classes:
                 # initialize a sliding window meb for each class
                 self.classifiers[cl] = self.swmeb(eps1=self.eps, 
                                         window_size=self.w_size, batch_size=1)
+            
             
             self.initial_fit = False
                     
@@ -65,7 +69,7 @@ class SWMEBClf:
             else:
                 #print('no learn')
                 pass
-            
+
     def predict(self, X:np.array, silent=False):
         if (len(X.shape)) == 1:
             # single datapoint

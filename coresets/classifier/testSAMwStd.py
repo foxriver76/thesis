@@ -80,9 +80,7 @@ streams = [
             ]
 
 
-
 first = True
-
 
     
 for ii in range(len(streams)):    
