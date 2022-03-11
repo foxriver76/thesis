@@ -3,7 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 colors = {
-        'MEB': 'blue',
+        'MEB$_5$': 'blue',
+        'MEB$_{50}$': 'purple',
+        'MEB$_{100}$': 'red',
+        'MEB$_{300}$': 'green',
         'ARSLVQ': 'orange'
         }
 
@@ -17,7 +20,7 @@ def plot_memory(input_path, output_path):
                      c=colors[label])
     
     plt.legend(loc='best')
-    plt.yscale('log')
+    plt.yscale('linear')
     plt.xlabel('Timestep $t$')
     plt.ylabel('Model size in kB')   
     plt.savefig(output_path)

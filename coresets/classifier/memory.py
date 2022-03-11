@@ -17,10 +17,16 @@ warnings.filterwarnings('ignore')
 
 def init_classifiers():
     rslvq = RSLVQ(prototypes_per_class=4, sigma=4, gradient_descent='adadelta')
-    swmeb = SWMEBClf(eps=0.1, w_size=100, kernelized=True, only_misclassified=True, kernel_fun=elm_kernel_vec)
-    
-    clfs = [rslvq, swmeb]
-    names = ["ARSLVQ", "MEB"]
+    swmeb_5 = SWMEBClf(eps=0.1, w_size=5, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec)
+    swmeb_50 = SWMEBClf(eps=0.1, w_size=50, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec)
+    swmeb_100 = SWMEBClf(eps=0.1, w_size=100, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec)
+    swmeb_300 = SWMEBClf(eps=0.1, w_size=300, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec)
+
+
+    clfs = [rslvq, swmeb_5, swmeb_50, swmeb_100, swmeb_300]
+    names = ["ARSLVQ", "MEB$_5$", 
+             'MEB$_{50}$', 'MEB$_{100}$', 
+             'MEB$_{300}$']
 
     return clfs, names
 
