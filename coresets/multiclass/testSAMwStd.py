@@ -6,15 +6,17 @@ Created on Thu Nov 26 12:17:30 2020
 @author: Moritz Heusinger <moritz.heusinger@gmail.com>
 """
 
-from meb_classifier_sam import SWMEBClf
+import os
+import sys
+sys.path.append(os.path.abspath(__file__ + "../../../"))
+from coresets.classifier.meb_classifier_sam import SWMEBClf
 from skmultiflow.data import SEAGenerator, LEDGenerator, FileStream, MIXEDGenerator, AGRAWALGenerator, ConceptDriftStream
 from sklearn.metrics import accuracy_score
 from skmultiflow.prototype import RobustSoftLearningVectorQuantization as ARSLVQ
-from libSAM.elm_kernel import elm_kernel_vec
+from coresets.classifier.libSAM.elm_kernel import elm_kernel_vec
 from sklearn.metrics.pairwise import linear_kernel, laplacian_kernel, cosine_similarity, rbf_kernel
 import time
 import copy
-import os
 import numpy as np
 from mccvm_fast import MCCVM 
 
@@ -26,60 +28,68 @@ except:
 
 # optimized clfs
 clfs = [
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
+#        ARSLVQ(gradient_descent='adadelta'),
         ARSLVQ(gradient_descent='adadelta'),
         ARSLVQ(gradient_descent='adadelta'),
         ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        ARSLVQ(gradient_descent='adadelta'),
-        SWMEBClf(eps=0.1, w_size=300, kernelized=True, only_misclassified=False, kernel_fun=linear_kernel),
-        SWMEBClf(eps=0.1, w_size=50, kernelized=False, only_misclassified=False, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=100, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=100, kernelized=False, only_misclassified=False, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=300, kernelized=False, only_misclassified=False, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=300, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=True, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=5, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
-        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=300, kernelized=True, only_misclassified=False, kernel_fun=linear_kernel),
+#        SWMEBClf(eps=0.1, w_size=50, kernelized=False, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=100, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=100, kernelized=False, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=300, kernelized=False, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=300, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=True, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=5, kernelized=False, only_misclassified=True, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
+#        SWMEBClf(eps=0.1, w_size=5, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec),
         SWMEBClf(eps=0.1, w_size=300, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec), # untested
-        MCCVM(eps=0.1, w_size=1000, kernel_fun=elm_kernel_vec),
-        MCCVM(eps=0.1, w_size=50, kernel_fun=laplacian_kernel),
-        MCCVM(eps=0.1, w_size=1000, kernel_fun=elm_kernel_vec),
-        MCCVM(eps=0.1, w_size=50, kernel_fun=laplacian_kernel),
-        MCCVM(eps=0.1, w_size=50, kernel_fun=cosine_similarity),
-        MCCVM(eps=0.1, w_size=300, kernel_fun=laplacian_kernel),
-        MCCVM(eps=0.1, w_size=50, kernel_fun=laplacian_kernel),
-        MCCVM(eps=0.1, w_size=5, kernel_fun=linear_kernel),
-        MCCVM(eps=0.1, w_size=50, kernel_fun=cosine_similarity),
-        MCCVM(eps=0.1, w_size=5, kernel_fun=rbf_kernel),
-        MCCVM(eps=0.1, w_size=5, kernel_fun=rbf_kernel),
-        MCCVM(eps=0.1, w_size=5, kernel_fun=rbf_kernel)
+        SWMEBClf(eps=0.1, w_size=300, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec), # untested
+        SWMEBClf(eps=0.1, w_size=300, kernelized=True, only_misclassified=False, kernel_fun=elm_kernel_vec), # untested
+#        MCCVM(eps=0.1, w_size=1000, kernel_fun=elm_kernel_vec),
+#        MCCVM(eps=0.1, w_size=50, kernel_fun=laplacian_kernel),
+#        MCCVM(eps=0.1, w_size=1000, kernel_fun=elm_kernel_vec),
+#        MCCVM(eps=0.1, w_size=50, kernel_fun=laplacian_kernel),
+#        MCCVM(eps=0.1, w_size=50, kernel_fun=cosine_similarity),
+#        MCCVM(eps=0.1, w_size=300, kernel_fun=laplacian_kernel),
+#        MCCVM(eps=0.1, w_size=50, kernel_fun=laplacian_kernel),
+#        MCCVM(eps=0.1, w_size=5, kernel_fun=linear_kernel),
+#        MCCVM(eps=0.1, w_size=50, kernel_fun=cosine_similarity),
+#        MCCVM(eps=0.1, w_size=5, kernel_fun=rbf_kernel),
+#        MCCVM(eps=0.1, w_size=5, kernel_fun=rbf_kernel),
+        MCCVM(eps=0.1, w_size=300, kernel_fun=rbf_kernel),
+        MCCVM(eps=0.1, w_size=300, kernel_fun=rbf_kernel),
+        MCCVM(eps=0.1, w_size=300, kernel_fun=rbf_kernel)
         ]
 
 PRETRAIN_SIZE:int = 100
 N_SAMPLES:int = 300000
 
 streams = [
-            ConceptDriftStream(MIXEDGenerator(classification_function=0), MIXEDGenerator(classification_function=1), position=N_SAMPLES // 2, width=1), 
-            ConceptDriftStream(SEAGenerator(classification_function=0), SEAGenerator(classification_function=1), position=N_SAMPLES // 2, width=1), 
-            ConceptDriftStream(MIXEDGenerator(classification_function=0), MIXEDGenerator(classification_function=1), position=N_SAMPLES // 2, width=N_SAMPLES // 20), 
-            ConceptDriftStream(SEAGenerator(classification_function=0), SEAGenerator(classification_function=1), position=N_SAMPLES // 2, width=N_SAMPLES // 20), 
-            LEDGenerator(has_noise=True, noise_percentage=0.1),
-            AGRAWALGenerator(), 
-            FileStream('data/weather.csv'),
-            FileStream('data/elec.csv'),
-            FileStream('data/gmsc.csv'),
-            FileStream('data/poker.csv'),
-            FileStream('data/moving_squares.csv'),
-            FileStream('data/obera_pre.csv')
+#            ConceptDriftStream(MIXEDGenerator(classification_function=0), MIXEDGenerator(classification_function=1), position=N_SAMPLES // 2, width=1), 
+#            ConceptDriftStream(SEAGenerator(classification_function=0), SEAGenerator(classification_function=1), position=N_SAMPLES // 2, width=1), 
+#            ConceptDriftStream(MIXEDGenerator(classification_function=0), MIXEDGenerator(classification_function=1), position=N_SAMPLES // 2, width=N_SAMPLES // 20), 
+#            ConceptDriftStream(SEAGenerator(classification_function=0), SEAGenerator(classification_function=1), position=N_SAMPLES // 2, width=N_SAMPLES // 20), 
+#            LEDGenerator(has_noise=True, noise_percentage=0.1),
+#            AGRAWALGenerator(), 
+#            FileStream('data/weather.csv'),
+#            FileStream('data/elec.csv'),
+#            FileStream('data/gmsc.csv'),
+#            FileStream('data/poker.csv'),
+#            FileStream('data/moving_squares.csv'),
+            FileStream('../../datasets/obera_binary.csv'),
+            FileStream('../../datasets/obera_compressed.csv'),
+            FileStream('../../datasets/obera_high.csv')
             ]
 
 # 3 algorithms

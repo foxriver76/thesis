@@ -1,0 +1,54 @@
+[{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_binary.csv', n_targets=1,           target_idx=-1)",
+	"clf": "RobustSoftLearningVectorQuantization(gamma=0.9, gradient_descent='adadelta',                                     initial_prototypes=None,                                     prototypes_per_class=1, random_state=None,                                     sigma=1.0)",
+	"acc": 0.9017574069384654 +- 0.07894936805810157,
+	"time": 6.145809841156006 +- 0.2098860331775855
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_compressed.csv', n_targets=1,           target_idx=-1)",
+	"clf": "RobustSoftLearningVectorQuantization(gamma=0.9, gradient_descent='adadelta',                                     initial_prototypes=None,                                     prototypes_per_class=1, random_state=None,                                     sigma=1.0)",
+	"acc": 0.6437224613826286 +- 0.01732769282735702,
+	"time": 12.409489917755128 +- 0.1590396273172708
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_high.csv', n_targets=1,           target_idx=-1)",
+	"clf": "RobustSoftLearningVectorQuantization(gamma=0.9, gradient_descent='adadelta',                                     initial_prototypes=None,                                     prototypes_per_class=1, random_state=None,                                     sigma=1.0)",
+	"acc": 0.2871410483666751 +- 0.014444163079260575,
+	"time": 32.712954664230345 +- 0.5693493108379093
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_binary.csv', n_targets=1,           target_idx=-1)",
+	"clf": "SWMEB eps: 0.1, kernelized: True, w_size: 300 only_mis: False kernel: <function elm_kernel_vec at 0xffff724959d0>",
+	"acc": 0.8516839706254749 +- 0.0,
+	"time": 67.59084439277649 +- 1.0663003800944384
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_compressed.csv', n_targets=1,           target_idx=-1)",
+	"clf": "SWMEB eps: 0.1, kernelized: True, w_size: 300 only_mis: False kernel: <function elm_kernel_vec at 0xffff724959d0>",
+	"acc": 0.38594580906558623 +- 0.0,
+	"time": 70.75360913276673 +- 1.03050260939375
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_high.csv', n_targets=1,           target_idx=-1)",
+	"clf": "SWMEB eps: 0.1, kernelized: True, w_size: 300 only_mis: False kernel: <function elm_kernel_vec at 0xffff724959d0>",
+	"acc": 0.2120790073436313 +- 0.0,
+	"time": 98.62675004005432 +- 11.447259502963636
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_binary.csv', n_targets=1,           target_idx=-1)",
+	"clf": "MCCVM eps: 0.1, w_size: 5 kernel: <function rbf_kernel at 0xffff73394160>",
+	"acc": 0.9999240314003546 +- 0.0,
+	"time": 35.36505074501038 +- 0.5134793635271405
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_compressed.csv', n_targets=1,           target_idx=-1)",
+	"clf": "MCCVM eps: 0.1, w_size: 5 kernel: <function rbf_kernel at 0xffff73394160>",
+	"acc": 0.9989111167384148 +- 0.0,
+	"time": 37.07774271965027 +- 0.7270143571430623
+},
+{
+	"stream": "FileStream(allow_nan=False, cat_features=None,           filepath='../../datasets/obera_high.csv', n_targets=1,           target_idx=-1)",
+	"clf": "MCCVM eps: 0.1, w_size: 5 kernel: <function rbf_kernel at 0xffff73394160>",
+	"acc": 0.9985059508736389 +- 0.0,
+	"time": 42.04044589996338 +- 1.3612114657872227
+}]

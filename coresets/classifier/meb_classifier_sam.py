@@ -6,10 +6,10 @@ Created on Fri Nov 20 08:57:40 2020
 @author: Moritz Heusinger <moritz.heusinger@gmail.com>
 """
 
-from libSAM.swmeb_plus import SWMEB_Plus
-from libSAM.kernel_swmeb_plus import KernelSWMEB_Plus
+from .libSAM.swmeb_plus import SWMEB_Plus
+from .libSAM.kernel_swmeb_plus import KernelSWMEB_Plus
 import numpy as np
-from libSAM.elm_kernel import elm_kernel_vec
+from .libSAM.elm_kernel import elm_kernel_vec
 
 class SWMEBClf:
     """ eps : float
