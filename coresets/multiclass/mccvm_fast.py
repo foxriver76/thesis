@@ -25,7 +25,7 @@ class MCCVM:
         self.label_map = {}
         self.classifier = KernelSWMEB_Plus(eps1=self.eps, 
                                         window_size=self.w_size, batch_size=1)
-    def partial_fit(self, X:np.array, y:np.array, classes:np.array):
+    def partial_fit(self, X:np.array, y:np.array, classes=None):
         """ X : np.array
                 data
             y : np.array
@@ -36,6 +36,9 @@ class MCCVM:
         # lets modify y to matrix
         
         if self.initial_fit is True:
+            if classes is None:
+                raise ValueError('Classes not provided on initial fit call')
+                
             n_classes = len(classes)
 
             for cl, i in zip(classes, range(len(classes))):
