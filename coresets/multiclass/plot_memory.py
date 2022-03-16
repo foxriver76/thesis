@@ -29,11 +29,11 @@ def plot_memory(input_path, output_path):
                      c=colors[label], linestyle=lines[label])
     
     plt.legend(loc='best')
-    plt.yscale('linear')
+    plt.yscale('log')
     plt.xlabel('Timestep $t$')
     plt.ylabel('Model size in kB')   
     plt.savefig(output_path)
     plt.show()
 
 # led
-plot_memory('_Led Generator_memory_other.csv', 'plt/coreset_mccvm_memory.eps')
+plot_memory('_Led Generator with drift_memory_other.csv', 'plt/coreset_mccvm_memory.eps')

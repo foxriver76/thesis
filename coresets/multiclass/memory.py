@@ -12,7 +12,7 @@ from coresets.classifier.meb_classifier_sam import SWMEBClf
 from coresets.classifier.libSAM.elm_kernel import elm_kernel_vec
 from mccvm_fast import MCCVM 
 from sklearn.metrics.pairwise import linear_kernel, laplacian_kernel, cosine_similarity, rbf_kernel
-from skmultiflow.data import LEDGenerator
+from skmultiflow.data import LEDGeneratorDrift
 
 # disable the stream generator warnings
 import warnings
@@ -56,6 +56,7 @@ parallel = 2
 study_size = 50000 #100000
 metrics = ['accuracy', 'model_size']
 
-stream  = LEDGenerator()
+stream  = LEDGeneratorDrift(noise_percentage=0.1, has_noise=True)
+
 # we need a multiclass stream here
 evaluate(stream, metrics, study_size)
