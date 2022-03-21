@@ -8,21 +8,22 @@ Created on Tue Jun 30 09:52:44 2020
 
 from sklearn.base import BaseEstimator, ClassifierMixin
 from skmultiflow.bayes.naive_bayes import NaiveBayes
-from bix.detectors.kswin import KSWIN
 from skmultiflow.drift_detection.adwin import ADWIN
 from skmultiflow.drift_detection.eddm import  EDDM
 from skmultiflow.drift_detection.ddm import DDM
-from bix.detectors.ksvec import KSVEC
-from sw_mebwin import SWMEBWIN as MEBWIND
-from kernel_swmebwin import Kernel_SWMEBWIN as KMEBWIND
+from skmultiflow.drift_detection import KSWIN
+from detector.lib.sw_mebwin import SWMEBWIN as MEBWIND
+from detector.lib.kernel_swmebwin import Kernel_SWMEBWIN as KMEBWIND
 
 class cdnb(ClassifierMixin, BaseEstimator):
-    def __init__(self, alpha=0.001, drift_detector="KSWIN"):
+    def __init__(self, alpha=0.001, drift_detector="KSWIN", epsilon=0.05, w_size=80):
         self.classifier = NaiveBayes()
         self.init_drift_detection = True
         self.drift_detector = drift_detector.upper()
         self.confidence = alpha
         self.n_detections = 0
+        self.epsilon = epsilon
+        self.w_size = w_size
 
     def partial_fit(self, X, y, classes=None):
             """
@@ -49,7 +50,7 @@ class cdnb(ClassifierMixin, BaseEstimator):
     def concept_drift_detection(self, X, Y, classes):
         if self.init_drift_detection:
             if self.drift_detector == "KSWIN":
-                self.cdd = [KSWIN(w_size = 100, stat_size = 30, alpha=self.confidence) for elem in X.T]
+                self.cdd = [KSWIN(window_size = 100, stat_size = 30, alpha=self.confidence) for elem in X.T]
             if self.drift_detector == "ADWIN":
                 self.cdd = [ADWIN() for elem in X.T]
             if self.drift_detector == "DDM":
@@ -59,9 +60,9 @@ class cdnb(ClassifierMixin, BaseEstimator):
 #            if self.drift_detector == "KSVEC":
 #                self.cdd = KSVEC(vec_size=X.shape[1])
             if self.drift_detector == 'MEBWIND':
-                self.cdd = MEBWIND(classes=classes, w_size=80, epsilon=0.05)
+                self.cdd = MEBWIND(classes=classes, w_size=self.w_size, epsilon=self.epsilon)
             if self.drift_detector == 'KMEBWIND':
-                self.cdd = KMEBWIND(classes=classes, w_size=80, epsilon=0.05)
+                self.cdd = KMEBWIND(classes=classes, w_size=self.w_size, epsilon=self.epsilon)
                 
             self.init_drift_detection = False
         self.drift_detected = False

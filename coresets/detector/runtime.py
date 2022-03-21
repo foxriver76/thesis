@@ -22,7 +22,6 @@ plt.ioff()
 
 stream = ReoccuringDriftStream(stream=SEAGenerator(classification_function=0), drift_stream=SEAGenerator(classification_function=1), width=1, alpha=90, pause=1000, position=2000)
 
-stream.prepare_for_use()
 stream.next_sample()
 
 RANGE = 10000
