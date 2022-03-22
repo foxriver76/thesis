@@ -8,7 +8,7 @@ stream = SEAGenerator()
 stream.next_sample()
 
 RANGE = 10000
-DIM = 52
+DIM = 201
 n_rand_dims = DIM - stream.current_sample_x.size
 multiply = n_rand_dims // stream.current_sample_x.size
 
@@ -27,4 +27,4 @@ for i in range(RANGE):
 df = pd.DataFrame(data)
 df['labels'] = labels
 
-df.to_csv('high_dim_stream.csv')
+df.to_csv('very_high_dim_stream.csv')

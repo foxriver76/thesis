@@ -34,11 +34,12 @@ def plot_memory(input_path, output_path):
                      c=colors[label], linestyle=lines[label], marker=marker[label])
     
     plt.legend(loc='best')
-    plt.yscale('log')
+    plt.yscale('linear')
     plt.xlabel('Timestep $t$')
     plt.ylabel('Model size in kB')   
     plt.savefig(output_path)
     plt.show()
 
 # led
-plot_memory('_SEA_high_memory_other.csv', 'plt/coreset_cdd_memory.eps')
+#plot_memory('_SEA_high_memory_other.csv', 'plt/coreset_cdd_high_memory.eps')
+plot_memory('_SEA_very_high_memory_other.csv', 'plt/coreset_cdd_very_high_memory.eps')

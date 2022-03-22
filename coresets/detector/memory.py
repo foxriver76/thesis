@@ -47,7 +47,9 @@ parallel = 2
 study_size = 50000 #100000
 metrics = ['accuracy', 'model_size']
 
-stream  = FileStream('high_dim_stream.csv')
-stream.name = 'SEA_high'
+#stream  = FileStream('high_dim_stream.csv')
+#stream.name = 'SEA_high'
+stream  = FileStream('very_high_dim_stream.csv')
+stream.name = 'SEA_very_high'
 
 evaluate(stream, metrics, study_size)
