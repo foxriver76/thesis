@@ -28,4 +28,5 @@ plt.ylim(0, 1)
 plt.xlabel('Dimension 0')
 plt.ylabel('Dimension 1')
 
-plt.savefig('minimum_enc_ball.eps')
+ax.set_rasterized(True)
+plt.savefig('minimum_enc_ball.pdf', dpi=300)
