@@ -117,6 +117,7 @@ class ReactiveRobustSoftLearningVectorQuantization(ClassifierMixin, BaseEstimato
         for i in range(n_data):
             xi = x[i]
             c_xi = y[i]
+
             for j in range(prototypes.shape[0]):
                 d = (xi - prototypes[j])
 
@@ -299,6 +300,7 @@ class ReactiveRobustSoftLearningVectorQuantization(ClassifierMixin, BaseEstimato
             if self.initial_fit:
                 self.prototype_set = np.empty([np.sum(nb_ppc), nb_features], dtype=np.double)
                 self.prototypes_classes = np.empty([nb_ppc.sum()], dtype=self.class_labels .dtype)
+
             pos = 0
             for actClassIdx in range(len(self.class_labels )):
                 actClass = self.class_labels [actClassIdx]
@@ -320,6 +322,7 @@ class ReactiveRobustSoftLearningVectorQuantization(ClassifierMixin, BaseEstimato
             x = validation.check_array(self.initial_prototypes)
             self.prototype_set = x[:, :-1]
             self.prototypes_classes = x[:, -1]
+
             if self.prototype_set.shape != (np.sum(nb_ppc), nb_features):
                 raise ValueError("the initial prototypes have wrong shape\n"
                                  "found=(%d,%d)\n"
@@ -456,10 +459,17 @@ class ReactiveRobustSoftLearningVectorQuantization(ClassifierMixin, BaseEstimato
             if type(self.initial_prototypes) == np.ndarray:
                 self.initial_prototypes = np.append(neprototype_setprototypes, labels[:, None], axis=1)
         else:
+            return
             labels = self.class_labels
             neprototype_setprototypes = np.array([self.geometric_median(X[Y == l]) for l in labels])
+            print(self.prototype_set)
+
             self.prototype_set = np.append(self.prototype_set, neprototype_setprototypes, axis=0)
+            print(self.prototype_set)
+            print(self.prototypes_classes)
             self.prototypes_classes = np.append(self.prototypes_classes, labels, axis=0)
+            print('d')
+            print(self.prototypes_classes)
             self.prototypes_per_class = self.prototypes_per_class + 1
             if type(self.initial_prototypes) == np.ndarray:
                 self.initial_prototypes = np.append(self.initial_prototypes,
