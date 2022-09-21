@@ -22,6 +22,8 @@ for eps in eps_arr:
 
 # else epsilon looks like varepsilon
 plt.rcParams["mathtext.fontset"] = "cm"
+plt.rc('axes', labelsize=14)
+plt.rc('legend', fontsize=14)
 
 #plt.yscale('log')
 plt.plot(eps_arr, jl_dims_eps, label='$w_+ = 500$', color='orange')
@@ -29,10 +31,13 @@ plt.xlabel('$\epsilon$')
 plt.ylabel('# of dimensions $k$')
 plt.legend()
 plt.show()
+plt.savefig('plt/rp_jl_eps.eps')
 
 #plt.yscale('log')
+plt.figure()
 plt.plot(n_samples_arr, jl_dims_samples, label='$\epsilon=0.1$', color='orange')
 plt.xlabel('$w_+$')
 plt.ylabel('# of dimensions $k$')
 plt.legend()
 plt.show()
+plt.savefig('plt/rp_jl_w.eps')
